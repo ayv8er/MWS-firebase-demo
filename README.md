@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# ReactJS Demo - Magic Wallet Services + Firebase Auth
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Deployed URL: [https://mws-firebase-demo.vercel.app/](https://mws-firebase-demo.vercel.app/)
 
-## Available Scripts
+ReactJS, Magic Web SDK and Firebase Auth
+Use Firebase Auth for user authentication, and Magic for wallet creation and key management.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+A. Firebase
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Create a [Firebase account](https://firebase.google.com/).
+2. Go to the [console](https://console.firebase.google.com/) and create a project by clicking "Add project."
+3. In the "Project Overview" page, add a Web app to get started and register your app by giving it a nickname.
+4. Add a Firebase SDK (via npm or script tag) and retain your app's Firebase configuration held in `firebaseConfig`.
+5. Click on "Project settings" under the settings of "Project Overview," and retain the `Project ID`.
+6. In the Project Overview page, choose the Authentication product to add to your application.
+7. Click "Get Started" and under the "Sign-in method" tab, enable "Email/Password" under "Native providers".
+8. Link to [Firebase Auth JavaScript Web API documentation](https://firebase.google.com/docs/reference/js/auth.md?authuser=0&hl=en#auth_package)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+B. Magic
 
-### `npm test`
+1. Create a [Magic account](https://magic.link/).
+2. Create a Magic Auth application and retain the `Publishable API Key`.
+3. Link to [Magic Web API docs](https://magic.link/docs/auth/api-reference/client-side-sdks/web).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+C. Magic MWS Setup
 
-### `npm run build`
+1. Contact Magic and provide the Firebase `Project ID` and Magic `Publishable API Key`.
+2. Magic will return a `Provider ID`, please retain this.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation
 
-### `npm run eject`
+**Before you install:** please read the [prerequisites](#prerequisites)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Stary by cloning this repo on your local machine:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+$ git clone git@github.com:ayv8er/MWS-Auth0-Demo.git
+# or
+$ cd PROJECT
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To install and set up the library, run:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+$ npm install
+# or
+$ yarn add
+```
 
-## Learn More
+## Serving the app
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+$ npm run dev
+# or
+$ yarn dev
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Env setup
 
-### Code Splitting
+Insert the following values obtained in the [prerequisites](#prerequisites) section, into the `.env` file
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+NEXT_PUBLIC_MAGIC_PUBLISHABLE_API_KEY=
+NEXT_PUBLIC_MAGIC_PROVIDER_ID=
+NEXT_PUBLIC_AUTH0_DOMAIN=
+NEXT_PUBLIC_AUTH0_CLIENT_ID=
+NEXT_PUBLIC_AUTH0_SECRET_ID=
+```
 
-### Analyzing the Bundle Size
+## \_app.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+In the Auth0Provider, pass values into the `domain` and `clientId` keys. Pass "http://localhost:3000" as value into `appOrigin` and `redirectUri`.
 
-### Making a Progressive Web App
+## index.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+In the Magic constructor, pass env values into...
 
-### Advanced Configuration
+```
+const magicClient = new Magic(<Magic_Publishable_API_Key>)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+In the Magic loginWithOIDC method, pass env values into...
 
-### Deployment
+```
+const did = await magic.openid.loginWithOIDC({
+    jwt: <Auth0_User_ID_Token>,
+    providerId: <Magic_Provider_ID>
+})
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
