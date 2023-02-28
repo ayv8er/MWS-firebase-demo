@@ -35,7 +35,7 @@ function Dashboard() {
   return (
     <div className="outer">
       <div className="inner">
-        Logged in as
+        <p>Logged in as</p>
         {user && <div>{user.email}</div>}
         {metadata && <div>{metadata.publicAddress}</div>}
         <button className="btn" onClick={callMagic}>
