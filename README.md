@@ -94,21 +94,4 @@ Pass the following values into the firebaseConfig object.
 Pass `REACT_APP_MAGIC_PUBLISHABLE_API_KEY` into the Magic constructor to create magic instance.
 Pass `REACT_APP_MAGIC_PROVIDER_ID` into the `loginWithOIDC` method along with user's OIDC jwt to login user.
 
-## index.js
-
-In the Magic constructor, pass env values into...
-
-```
-const magicClient = new Magic(<Magic_Publishable_API_Key>)
-```
-
-In the Magic loginWithOIDC method, pass env values into...
-
-```
-const did = await magic.openid.loginWithOIDC({
-    jwt: <Auth0_User_ID_Token>,
-    providerId: <Magic_Provider_ID>
-})
-```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
