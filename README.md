@@ -40,7 +40,7 @@ These instructions will get you a copy of the project up and running on your loc
 Stary by cloning this repo on your local machine:
 
 ```bash
-$ git clone git@github.com:ayv8er/MWS-Auth0-Demo.git
+$ git clone https://github.com/ayv8er/MWS-firebase-demo.git
 # or
 $ cd PROJECT
 ```
@@ -66,16 +66,33 @@ $ yarn dev
 Insert the following values obtained in the [prerequisites](#prerequisites) section, into the `.env` file
 
 ```
-NEXT_PUBLIC_MAGIC_PUBLISHABLE_API_KEY=
-NEXT_PUBLIC_MAGIC_PROVIDER_ID=
-NEXT_PUBLIC_AUTH0_DOMAIN=
-NEXT_PUBLIC_AUTH0_CLIENT_ID=
-NEXT_PUBLIC_AUTH0_SECRET_ID=
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+REACT_APP_FIREBASE_APP_ID=
+REACT_APP_FIREBASE_MEASUREMENT_ID=
+REACT_APP_MAGIC_PUBLISHABLE_API_KEY=
+REACT_APP_MAGIC_PROVIDER_ID=
 ```
 
-## \_app.js
+## firebase.js
 
-In the Auth0Provider, pass values into the `domain` and `clientId` keys. Pass "http://localhost:3000" as value into `appOrigin` and `redirectUri`.
+Pass the following values into the firebaseConfig object.
+
+`REACT_APP_FIREBASE_API_KEY`
+`REACT_APP_FIREBASE_AUTH_DOMAIN`
+`REACT_APP_FIREBASE_PROJECT_ID`
+`REACT_APP_FIREBASE_STORAGE_BUCKET`
+`REACT_APP_FIREBASE_MESSAGING_SENDER_ID`
+`REACT_APP_FIREBASE_APP_ID`
+`REACT_APP_FIREBASE_MEASUREMENT_ID`
+
+## auth-context.js
+
+Pass `REACT_APP_MAGIC_PUBLISHABLE_API_KEY` into the Magic constructor to create magic instance.
+Pass `REACT_APP_MAGIC_PROVIDER_ID` into the `loginWithOIDC` method along with user's OIDC jwt to login user.
 
 ## index.js
 
